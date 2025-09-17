@@ -12,12 +12,12 @@ const float = keyframes`
 
 const ChatbotContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
-  bottom: ${({ theme }) => theme.spacing.lg};
+  bottom: calc(80px + ${({ theme }) => theme.spacing.lg}); /* Above bottom navigation */
   right: ${({ theme }) => theme.spacing.lg};
-  z-index: 1000;
+  z-index: 1001; /* Higher than bottom navigation */
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    bottom: ${({ theme }) => theme.spacing.md};
+    bottom: calc(80px + ${({ theme }) => theme.spacing.md}); /* Above bottom navigation */
     right: ${({ theme }) => theme.spacing.md};
   }
 `
@@ -60,7 +60,7 @@ const ChatbotButton = styled.button<{ hasNotification?: boolean }>`
 
 const ChatWindow = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  bottom: 80px;
+  bottom: 80px; /* Above the chatbot button */
   right: 0;
   width: 320px;
   height: 400px;

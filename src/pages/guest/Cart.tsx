@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Minus, Plus, Trash2, CreditCard, Star, Gift, Check } from "lucide-react";
+import {
+  Minus,
+  Plus,
+  Trash2,
+  CreditCard,
+  Star,
+  Gift,
+  Check,
+} from "lucide-react";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { useAppStore } from "@/store";
@@ -93,38 +101,40 @@ const Title = styled.h1`
 `;
 
 const CartItems = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  margin-bottom: ${theme.spacing.xl};
 `;
 
 const CartItem = styled(Card)`
-  padding: ${({ theme }) => theme.spacing.md};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  padding: 0;
+  margin-bottom: ${theme.spacing.lg};
   display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid ${theme.colors.gray[200]};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing.lg};
-    gap: ${({ theme }) => theme.spacing.lg};
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${theme.shadows.xl};
+    border-color: ${theme.colors.primary};
   }
 `;
 
-const ItemImage = styled.div<{ imageUrl?: string }>`
-  width: 80px;
-  height: 80px;
-  background: ${({ imageUrl, theme }) =>
-    imageUrl
-      ? `url(${imageUrl}) center/cover`
-      : `linear-gradient(135deg, ${theme.colors.ocean}, ${theme.colors.secondary})`};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.white};
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  text-align: center;
+const ItemImage = styled.div<{ imageUrl: string }>`
+  width: 120px;
+  height: 120px;
+  background: url(${({ imageUrl }) => imageUrl}) center/cover;
   flex-shrink: 0;
-  box-shadow: ${({ theme }) => theme.shadows.md};
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+  }
 `;
 
 const ItemDetails = styled.div`
@@ -272,29 +282,138 @@ const EmptyIcon = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
-const CheckoutButton = styled(Button)<{ isComplete?: boolean; isProcessing?: boolean }>`
+const CheckoutButton = styled(Button)<{
+  isComplete?: boolean;
+  isProcessing?: boolean;
+}>`
   margin-top: 16px;
-  background: ${({ isComplete, isProcessing }) => 
+  background: ${({ isComplete, isProcessing }) =>
     isComplete ? "#10B981" : isProcessing ? "#6B7280" : undefined};
   position: relative;
   overflow: hidden;
 `;
 
-// Mock product images
-const getProductImage = (type: string, id: string) => {
-  const images = {
-    offer: [
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    ],
-    bundle: [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    ],
+// Real product data and images
+const productData = {
+  offers: {
+    off_cabana: {
+      title: "Sun Deck Cabana",
+      description: "Full-day lounger + fruit platter",
+      image:
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Premium Experience",
+    },
+    off_spa: {
+      title: "Couples Massage",
+      description: "75-min aromatherapy session",
+      image:
+        "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Spa & Wellness",
+    },
+    off_wifi: {
+      title: "Premium Wi-Fi",
+      description: "Unlimited streaming tier",
+      image:
+        "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Connectivity",
+    },
+    off_dine: {
+      title: "Chef's Table",
+      description: "7-course tasting menu",
+      image:
+        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Fine Dining",
+    },
+    off_kidsclub: {
+      title: "Kids Club Unlimited",
+      description: "All-week supervised programs",
+      image:
+        "https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Family Activities",
+    },
+    off_excursion_snorkel: {
+      title: "Snorkeling Adventure",
+      description: "Guided reef exploration with equipment",
+      image:
+        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Shore Excursion",
+    },
+    off_shopping: {
+      title: "Duty-Free Shopping Credit",
+      description: "$50 credit for onboard shopping",
+      image:
+        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Shopping & Retail",
+    },
+    off_fitness: {
+      title: "Personal Training Session",
+      description: "1-hour session with certified trainer",
+      image:
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Fitness & Wellness",
+    },
+  },
+  bundles: {
+    bun_luxury: {
+      title: "Luxury Escape",
+      description: "Massage + Chef's Table + Premium Wi-Fi",
+      image:
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Premium Package",
+    },
+    bun_family: {
+      title: "Family Adventure",
+      description: "Kids Club + Wi-Fi + Beach Day Cabana",
+      image:
+        "https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Family Package",
+    },
+    bun_romance: {
+      title: "Romantic Getaway",
+      description: "Couples Massage + Chef's Table + Cabana",
+      image:
+        "https://images.unsplash.com/photo-1520637836862-4d197d17c90a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Romance Package",
+    },
+    bun_adventure: {
+      title: "Adventure Seeker",
+      description: "Snorkeling + Fitness + Wi-Fi",
+      image:
+        "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      category: "Adventure Package",
+    },
+  },
+};
+
+interface ProductDetails {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
+
+const getProductDetails = (
+  type: "offer" | "bundle",
+  id: string
+): ProductDetails => {
+  const data = type === "offer" ? productData.offers : productData.bundles;
+  const product = data[id as keyof typeof data];
+
+  if (product) {
+    return product;
+  }
+
+  return {
+    title: `${type === "bundle" ? "Bundle" : "Offer"} ${id}`,
+    description: "Premium cruise experience",
+    image:
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    category: type === "bundle" ? "Package Deal" : "Individual Offer",
   };
-  const typeImages = images[type as keyof typeof images] || images.offer;
-  return typeImages[parseInt(id) % typeImages.length];
+};
+
+const getProductImage = (type: "offer" | "bundle", id: string) => {
+  return getProductDetails(type, id).image;
 };
 
 export const GuestCart: React.FC = () => {
@@ -403,16 +522,21 @@ export const GuestCart: React.FC = () => {
 
               <ItemDetails>
                 <ItemTitle>
-                  {item.type === "bundle"
-                    ? "Adventure Bundle"
-                    : "Shore Excursion"}{" "}
-                  {item.id}
+                  {getProductDetails(item.type, item.id).title}
                 </ItemTitle>
                 <ItemType>
-                  {item.type === "bundle"
-                    ? "Activity Package"
-                    : "Single Activity"}
+                  {getProductDetails(item.type, item.id).category}
                 </ItemType>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    color: "#666",
+                    marginTop: "4px",
+                    padding: "16px",
+                  }}
+                >
+                  {getProductDetails(item.type, item.id).description}
+                </div>
               </ItemDetails>
 
               <ItemControls>
