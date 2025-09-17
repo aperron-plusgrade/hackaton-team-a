@@ -1,0 +1,7 @@
+[
+  {"date": "2025-11-04", "port": "Nassau", "condition": "Sunny", "tempC": 28, "windKph": 12},
+  {"date": "2025-11-06", "port": "Cozumel", "condition": "Showers", "tempC": 26, "windKph": 18},
+  {"date": "2025-11-08", "port": "Key West", "condition": "Partly Cloudy", "tempC": 27, "windKph": 15},
+  {"date": "2025-11-05", "port": "At Sea", "condition": "Sunny", "tempC": 29, "windKph": 8},
+  {"date": "2025-11-07", "port": "At Sea", "condition": "Cloudy", "tempC": 25, "windKph": 20}
+]

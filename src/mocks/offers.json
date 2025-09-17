@@ -1,0 +1,82 @@
+[
+  {
+    "id": "off_cabana",
+    "type": "experience",
+    "title": "Sun Deck Cabana",
+    "desc": "Full-day lounger + fruit platter",
+    "price": 89,
+    "currency": "USD",
+    "tags": ["sunny", "onboard"],
+    "media": "cabana.jpg"
+  },
+  {
+    "id": "off_spa",
+    "type": "spa",
+    "title": "Couples Massage",
+    "desc": "75-min aromatherapy session",
+    "price": 159,
+    "currency": "USD",
+    "tags": ["rainy", "romance"],
+    "media": "spa.jpg"
+  },
+  {
+    "id": "off_wifi",
+    "type": "service",
+    "title": "Premium Wi-Fi",
+    "desc": "Unlimited streaming tier",
+    "price": 59,
+    "currency": "USD",
+    "tags": ["any", "tech"],
+    "media": "wifi.jpg"
+  },
+  {
+    "id": "off_dine",
+    "type": "dining",
+    "title": "Chef's Table",
+    "desc": "7-course tasting menu",
+    "price": 129,
+    "currency": "USD",
+    "tags": ["luxury", "evening"],
+    "media": "dining.jpg"
+  },
+  {
+    "id": "off_kidsclub",
+    "type": "kids",
+    "title": "Kids Club Unlimited",
+    "desc": "All-week supervised programs",
+    "price": 49,
+    "currency": "USD",
+    "tags": ["family"],
+    "media": "kids.jpg"
+  },
+  {
+    "id": "off_excursion_snorkel",
+    "type": "excursion",
+    "title": "Snorkeling Adventure",
+    "desc": "Guided reef exploration with equipment",
+    "price": 79,
+    "currency": "USD",
+    "tags": ["sunny", "adventure", "water"],
+    "media": "snorkel.jpg"
+  },
+  {
+    "id": "off_shopping",
+    "type": "shopping",
+    "title": "Duty-Free Shopping Credit",
+    "desc": "$50 credit for onboard shopping",
+    "price": 40,
+    "currency": "USD",
+    "tags": ["rainy", "indoor"],
+    "media": "shopping.jpg"
+  },
+  {
+    "id": "off_fitness",
+    "type": "fitness",
+    "title": "Personal Training Session",
+    "desc": "1-hour session with certified trainer",
+    "price": 85,
+    "currency": "USD",
+    "tags": ["wellness", "indoor"],
+    "media": "fitness.jpg"
+  }
+]

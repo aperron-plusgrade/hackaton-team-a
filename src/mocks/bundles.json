@@ -1,0 +1,46 @@
+[
+  {
+    "id": "bun_luxury",
+    "title": "Luxury Escape",
+    "desc": "Massage + Chef's Table + Premium Wi-Fi",
+    "items": ["off_spa", "off_dine", "off_wifi"],
+    "bundlePrice": 299,
+    "compareAt": 347,
+    "currency": "USD",
+    "media": "luxury.jpg",
+    "badges": ["Best Value", "Gold Tier Bonus"]
+  },
+  {
+    "id": "bun_family",
+    "title": "Family Adventure",
+    "desc": "Kids Club + Wi-Fi + Beach Day Cabana",
+    "items": ["off_kidsclub", "off_wifi", "off_cabana"],
+    "bundlePrice": 169,
+    "compareAt": 197,
+    "currency": "USD",
+    "media": "family.jpg",
+    "badges": ["Family Favorite"]
+  },
+  {
+    "id": "bun_romance",
+    "title": "Romantic Getaway",
+    "desc": "Couples Massage + Chef's Table + Cabana",
+    "items": ["off_spa", "off_dine", "off_cabana"],
+    "bundlePrice": 329,
+    "compareAt": 377,
+    "currency": "USD",
+    "media": "romance.jpg",
+    "badges": ["Couples Choice"]
+  },
+  {
+    "id": "bun_adventure",
+    "title": "Adventure Seeker",
+    "desc": "Snorkeling + Fitness + Wi-Fi",
+    "items": ["off_excursion_snorkel", "off_fitness", "off_wifi"],
+    "bundlePrice": 199,
+    "compareAt": 223,
+    "currency": "USD",
+    "media": "adventure.jpg",
+    "badges": ["Active Lifestyle"]
+  }
+]

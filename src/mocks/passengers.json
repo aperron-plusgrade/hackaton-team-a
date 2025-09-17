@@ -1,0 +1,53 @@
+[
+  {
+    "id": "res_78213",
+    "passengerId": "pax_1001",
+    "name": "Alex Martin",
+    "party": {"adults": 2, "children": 1, "infants": 0},
+    "cabinClass": "Balcony",
+    "loyaltyTier": "Gold",
+    "ship": "Ocean Vista",
+    "cruiseLine": "BlueWave Cruises",
+    "sailingStart": "2025-11-03",
+    "sailingEnd": "2025-11-10",
+    "itinerary": [
+      {"date": "2025-11-04", "port": "Nassau", "country": "Bahamas", "lat": 25.06, "lng": -77.34},
+      {"date": "2025-11-06", "port": "Cozumel", "country": "Mexico", "lat": 20.51, "lng": -86.95},
+      {"date": "2025-11-08", "port": "Key West", "country": "USA", "lat": 24.56, "lng": -81.78}
+    ]
+  },
+  {
+    "id": "res_78214",
+    "passengerId": "pax_1002",
+    "name": "Sarah & Mike Johnson",
+    "party": {"adults": 2, "children": 0, "infants": 0},
+    "cabinClass": "Suite",
+    "loyaltyTier": "Platinum",
+    "ship": "Ocean Vista",
+    "cruiseLine": "BlueWave Cruises",
+    "sailingStart": "2025-11-03",
+    "sailingEnd": "2025-11-10",
+    "itinerary": [
+      {"date": "2025-11-04", "port": "Nassau", "country": "Bahamas", "lat": 25.06, "lng": -77.34},
+      {"date": "2025-11-06", "port": "Cozumel", "country": "Mexico", "lat": 20.51, "lng": -86.95},
+      {"date": "2025-11-08", "port": "Key West", "country": "USA", "lat": 24.56, "lng": -81.78}
+    ]
+  },
+  {
+    "id": "res_78215",
+    "passengerId": "pax_1003",
+    "name": "Emma Wilson",
+    "party": {"adults": 1, "children": 0, "infants": 0},
+    "cabinClass": "Interior",
+    "loyaltyTier": "Silver",
+    "ship": "Ocean Vista",
+    "cruiseLine": "BlueWave Cruises",
+    "sailingStart": "2025-11-03",
+    "sailingEnd": "2025-11-10",
+    "itinerary": [
+      {"date": "2025-11-04", "port": "Nassau", "country": "Bahamas", "lat": 25.06, "lng": -77.34},
+      {"date": "2025-11-06", "port": "Cozumel", "country": "Mexico", "lat": 20.51, "lng": -86.95},
+      {"date": "2025-11-08", "port": "Key West", "country": "USA", "lat": 24.56, "lng": -81.78}
+    ]
+  }
+]

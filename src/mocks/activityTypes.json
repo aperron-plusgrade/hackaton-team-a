@@ -1,0 +1,66 @@
+[
+  {
+    "id": "adventure",
+    "name": "Adventure & Thrills",
+    "emoji": "🏄‍♂️",
+    "description": "Exciting activities that get your heart pumping",
+    "color": "#FF6B6B",
+    "activities": ["snorkeling", "zip-lining", "rock-climbing", "jet-skiing", "parasailing"]
+  },
+  {
+    "id": "relaxation",
+    "name": "Relaxation & Wellness",
+    "emoji": "🧘‍♀️",
+    "description": "Peaceful activities to unwind and recharge",
+    "color": "#4ECDC4",
+    "activities": ["spa", "yoga", "meditation", "massage", "beach-lounging"]
+  },
+  {
+    "id": "family",
+    "name": "Family Fun",
+    "emoji": "👨‍👩‍👧‍👦",
+    "description": "Activities perfect for the whole family",
+    "color": "#FFE66D",
+    "activities": ["mini-golf", "family-games", "kids-club", "family-dining", "pool-activities"]
+  },
+  {
+    "id": "culture",
+    "name": "Culture & History",
+    "emoji": "🏛️",
+    "description": "Explore local culture and historical sites",
+    "color": "#45B7D1",
+    "activities": ["museum-tours", "historical-sites", "local-markets", "cultural-shows", "cooking-classes"]
+  },
+  {
+    "id": "dining",
+    "name": "Food & Drinks",
+    "emoji": "🍽️",
+    "description": "Culinary experiences and specialty dining",
+    "color": "#F38BA8",
+    "activities": ["specialty-dining", "wine-tasting", "cooking-classes", "food-tours", "cocktail-making"]
+  },
+  {
+    "id": "nature",
+    "name": "Nature & Wildlife",
+    "emoji": "🌿",
+    "description": "Connect with nature and discover wildlife",
+    "color": "#06D6A0",
+    "activities": ["wildlife-tours", "botanical-gardens", "hiking", "bird-watching", "eco-tours"]
+  },
+  {
+    "id": "entertainment",
+    "name": "Shows & Entertainment",
+    "emoji": "🎭",
+    "description": "Live performances and entertainment",
+    "color": "#9B59B6",
+    "activities": ["theater-shows", "live-music", "comedy-shows", "dance-performances", "karaoke"]
+  },
+  {
+    "id": "shopping",
+    "name": "Shopping & Souvenirs",
+    "emoji": "🛍️",
+    "description": "Find unique treasures and local crafts",
+    "color": "#E67E22",
+    "activities": ["local-markets", "duty-free", "artisan-crafts", "jewelry-shopping", "souvenir-hunting"]
+  }
+]

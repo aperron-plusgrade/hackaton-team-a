@@ -1,0 +1,95 @@
+[
+  {
+    "id": "rule_sunny_beach",
+    "name": "Sunny→Cabana Push",
+    "when": {
+      "port": ["Nassau", "Cozumel", "Key West"],
+      "weather": ["Sunny", "Partly Cloudy"],
+      "dateRange": {
+        "start": "2025-11-01",
+        "end": "2025-12-31"
+      }
+    },
+    "then": {
+      "promoteOffers": ["off_cabana", "off_excursion_snorkel"],
+      "promoteBundles": ["bun_family", "bun_adventure"],
+      "badges": ["Weather-Perfect"],
+      "discounts": [
+        {
+          "offerId": "off_cabana",
+          "percent": 10
+        }
+      ]
+    },
+    "priority": 80,
+    "enabled": true
+  },
+  {
+    "id": "rule_rain_spa",
+    "name": "Rainy→Spa & Dining",
+    "when": {
+      "weather": ["Showers", "Rain", "Cloudy"]
+    },
+    "then": {
+      "promoteOffers": ["off_spa", "off_dine", "off_shopping"],
+      "promoteBundles": ["bun_luxury", "bun_romance"],
+      "badges": ["Indoor Comfort"]
+    },
+    "priority": 70,
+    "enabled": true
+  },
+  {
+    "id": "rule_loyal_gold",
+    "name": "Gold Tier Perk",
+    "when": {
+      "loyaltyTier": ["Gold", "Platinum"]
+    },
+    "then": {
+      "perks": ["Free Welcome Cocktail"],
+      "discounts": [
+        {
+          "bundleId": "bun_luxury",
+          "percent": 8
+        }
+      ],
+      "badges": ["VIP Member"]
+    },
+    "priority": 60,
+    "enabled": true
+  },
+  {
+    "id": "rule_family_kids",
+    "name": "Family with Kids",
+    "when": {
+      "party.children": 1
+    },
+    "then": {
+      "promoteOffers": ["off_kidsclub"],
+      "promoteBundles": ["bun_family"],
+      "badges": ["Family Fun"],
+      "discounts": [
+        {
+          "offerId": "off_kidsclub",
+          "percent": 15
+        }
+      ]
+    },
+    "priority": 75,
+    "enabled": true
+  },
+  {
+    "id": "rule_suite_luxury",
+    "name": "Suite Guests Premium",
+    "when": {
+      "cabinClass": ["Suite"]
+    },
+    "then": {
+      "promoteOffers": ["off_dine", "off_spa"],
+      "promoteBundles": ["bun_luxury", "bun_romance"],
+      "perks": ["Priority Dining Reservations"],
+      "badges": ["Suite Exclusive"]
+    },
+    "priority": 65,
+    "enabled": true
+  }
+]

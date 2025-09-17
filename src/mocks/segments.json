@@ -1,0 +1,39 @@
+[
+  {
+    "id": "seg_family",
+    "name": "Family",
+    "definition": {
+      "childrenMin": 1
+    }
+  },
+  {
+    "id": "seg_couple",
+    "name": "Couple",
+    "definition": {
+      "adults": 2,
+      "children": 0
+    }
+  },
+  {
+    "id": "seg_solo",
+    "name": "Solo Traveler",
+    "definition": {
+      "adults": 1,
+      "children": 0
+    }
+  },
+  {
+    "id": "seg_loyal_gold",
+    "name": "Loyalty Gold",
+    "definition": {
+      "loyaltyTier": ["Gold", "Platinum"]
+    }
+  },
+  {
+    "id": "seg_luxury",
+    "name": "Luxury Guests",
+    "definition": {
+      "cabinClass": ["Suite", "Balcony"]
+    }
+  }
+]
