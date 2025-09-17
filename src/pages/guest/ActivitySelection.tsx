@@ -105,19 +105,49 @@ const ActivityGrid = styled.div`
   }
 `
 
-const ActivityCard = styled(Card)<{ selected?: boolean; color?: string }>`
+const ActivityCard = styled(Card)<{ 
+  selected?: boolean; 
+  color?: string; 
+  animating?: boolean;
+  justSelected?: boolean;
+}>`
   padding: 0;
   overflow: hidden;
-  cursor: pointer;
+  cursor: ${({ animating }) => animating ? 'wait' : 'pointer'};
+  pointer-events: ${({ animating }) => animating ? 'none' : 'auto'};
   position: relative;
   border: 2px solid ${({ selected, color }) => 
     selected ? color || theme.colors.primary : theme.colors.gray[200]};
   transition: all 0.3s ease;
+  transform: ${({ animating, justSelected }) => 
+    animating ? 'scale(0.95)' : 
+    justSelected ? 'scale(1.05)' : 'scale(1)'};
   
   &:hover {
-    transform: translateY(-4px);
+    transform: ${({ animating, justSelected }) => 
+      animating ? 'scale(0.95)' : 
+      justSelected ? 'scale(1.05)' : 'translateY(-4px)'};
     box-shadow: ${theme.shadows.xl};
   }
+
+  ${({ justSelected }) => justSelected && `
+    animation: successPulse 0.6s ease-out;
+    
+    @keyframes successPulse {
+      0% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+      }
+      100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+      }
+    }
+  `}
 `
 
 const ActivityImage = styled.div<{ imageUrl: string }>`
@@ -169,22 +199,55 @@ const ActivityDescription = styled.p`
   line-height: 1.4;
 `
 
-const SelectionIndicator = styled.div<{ selected?: boolean; color?: string }>`
+const SelectionIndicator = styled.div<{ 
+  selected?: boolean; 
+  color?: string; 
+  animating?: boolean;
+  justSelected?: boolean;
+}>`
   position: absolute;
   top: ${theme.spacing.md};
   right: ${theme.spacing.md};
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: ${({ selected, color }) => 
+  background: ${({ selected, color, animating }) => 
+    animating ? theme.colors.gray[400] :
     selected ? color || theme.colors.primary : 'rgba(255,255,255,0.9)'};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ selected }) => selected ? 'white' : theme.colors.gray[600]};
+  color: ${({ selected, animating }) => 
+    animating ? 'white' :
+    selected ? 'white' : theme.colors.gray[600]};
   transition: all 0.3s ease;
   z-index: 2;
   box-shadow: ${theme.shadows.md};
+  
+  ${({ animating }) => animating && `
+    animation: spin 0.6s linear;
+    
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  `}
+
+  ${({ justSelected }) => justSelected && `
+    animation: checkmark 0.6s ease-out;
+    
+    @keyframes checkmark {
+      0% { 
+        transform: scale(0.8);
+      }
+      50% { 
+        transform: scale(1.2);
+      }
+      100% { 
+        transform: scale(1);
+      }
+    }
+  `}
 `
 
 const ContinueSection = styled.div`
@@ -204,6 +267,26 @@ const SelectedCount = styled.div`
   color: ${theme.colors.gray[600]};
   margin-bottom: ${theme.spacing.md};
   font-weight: ${theme.typography.fontWeight.medium};
+`
+
+const FeedbackToast = styled.div<{ show: boolean }>`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) ${({ show }) => show ? 'translateY(0)' : 'translateY(-100px)'};
+  background: ${theme.colors.success};
+  color: white;
+  padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.full};
+  font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${theme.typography.fontWeight.semibold};
+  z-index: 1000;
+  opacity: ${({ show }) => show ? 1 : 0};
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.xs};
+  box-shadow: ${theme.shadows.lg};
 `
 
 interface ActivityType {
@@ -232,25 +315,57 @@ export const ActivitySelection: React.FC = () => {
   const { setSelectedActivityTypes } = useAppStore()
   const [selectedTypes, setSelectedTypes] = useState<string[]>([])
   const [activityTypes] = useState<ActivityType[]>(activityTypesData as ActivityType[])
+  const [animatingActivity, setAnimatingActivity] = useState<string | null>(null)
+  const [justSelected, setJustSelected] = useState<string | null>(null)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
 
   useEffect(() => {
     analytics.track(ANALYTICS_EVENTS.PAGE_VIEWED, { page: 'activity_selection' })
   }, [])
 
   const handleActivityToggle = (activityId: string) => {
-    setSelectedTypes(prev => {
-      const newSelection = prev.includes(activityId)
-        ? prev.filter(id => id !== activityId)
-        : [...prev, activityId]
-      
-      analytics.track('activity_type_selected', {
-        activityId,
-        selected: !prev.includes(activityId),
-        totalSelected: newSelection.length
+    // Set animating state
+    setAnimatingActivity(activityId)
+    
+    // Add a small delay for visual feedback
+    setTimeout(() => {
+      setSelectedTypes(prev => {
+        const wasSelected = prev.includes(activityId)
+        const newSelection = wasSelected
+          ? prev.filter(id => id !== activityId)
+          : [...prev, activityId]
+        
+        // Show feedback based on action
+        if (!wasSelected) {
+          // Selecting - show success animation and toast
+          setJustSelected(activityId)
+          const activityName = activityTypes.find(a => a.id === activityId)?.name || 'Activity'
+          setToastMessage(`✨ ${activityName} added!`)
+          setShowToast(true)
+          
+          setTimeout(() => setJustSelected(null), 1000)
+          setTimeout(() => setShowToast(false), 2000)
+        } else {
+          // Deselecting - show subtle feedback
+          const activityName = activityTypes.find(a => a.id === activityId)?.name || 'Activity'
+          setToastMessage(`${activityName} removed`)
+          setShowToast(true)
+          setTimeout(() => setShowToast(false), 1500)
+        }
+        
+        analytics.track('activity_type_selected', {
+          activityId,
+          selected: !wasSelected,
+          totalSelected: newSelection.length
+        })
+        
+        return newSelection
       })
       
-      return newSelection
-    })
+      // Clear animating state
+      setAnimatingActivity(null)
+    }, 150)
   }
 
   const handleContinue = () => {
@@ -268,6 +383,10 @@ export const ActivitySelection: React.FC = () => {
 
   return (
     <SelectionContainer>
+      <FeedbackToast show={showToast}>
+        {toastMessage}
+      </FeedbackToast>
+      
       <HeroSection>
         <Title>What do you love to do? 🌟</Title>
         <Subtitle>
@@ -287,6 +406,8 @@ export const ActivitySelection: React.FC = () => {
         <ActivityGrid>
           {activityTypes.map((activity) => {
             const isSelected = selectedTypes.includes(activity.id)
+            const isAnimating = animatingActivity === activity.id
+            const isJustSelected = justSelected === activity.id
             const imageUrl = activityImages[activity.id] || 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
             
             return (
@@ -294,7 +415,9 @@ export const ActivitySelection: React.FC = () => {
                 key={activity.id}
                 selected={isSelected}
                 color={activity.color}
-                onClick={() => handleActivityToggle(activity.id)}
+                animating={isAnimating}
+                justSelected={isJustSelected}
+                onClick={() => !isAnimating && handleActivityToggle(activity.id)}
                 data-testid={`activity-${activity.id}`}
               >
                 <ActivityImage imageUrl={imageUrl} />
@@ -309,8 +432,26 @@ export const ActivitySelection: React.FC = () => {
                   </ActivityHeader>
                 </ActivityContent>
                 
-                <SelectionIndicator selected={isSelected} color={activity.color}>
-                  {isSelected ? <Check size={18} /> : <Heart size={18} />}
+                <SelectionIndicator 
+                  selected={isSelected} 
+                  color={activity.color}
+                  animating={isAnimating}
+                  justSelected={isJustSelected}
+                >
+                  {isAnimating ? (
+                    <div style={{ 
+                      width: '12px', 
+                      height: '12px', 
+                      border: '2px solid transparent',
+                      borderTop: '2px solid white',
+                      borderRadius: '50%',
+                      animation: 'spin 0.8s linear infinite'
+                    }} />
+                  ) : isSelected ? (
+                    <Check size={18} />
+                  ) : (
+                    <Heart size={18} />
+                  )}
                 </SelectionIndicator>
               </ActivityCard>
             )
