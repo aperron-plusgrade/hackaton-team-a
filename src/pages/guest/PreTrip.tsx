@@ -118,10 +118,10 @@ const OfferCard = styled(Card)`
 const OfferImage = styled.div<{ imageUrl?: string }>`
   width: 100%;
   height: 160px;
-  background: ${({ imageUrl }) => 
+  background: ${({ imageUrl, theme }) => 
     imageUrl 
       ? `url(${imageUrl}) center/cover` 
-      : `linear-gradient(135deg, ${({ theme }) => theme.colors.ocean}, ${({ theme }) => theme.colors.secondary})`
+      : `linear-gradient(135deg, ${theme.colors.ocean}, ${theme.colors.secondary})`
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   margin-bottom: ${({ theme }) => theme.spacing.md};
@@ -222,7 +222,7 @@ const SurpriseButton = styled(Button)`
 
 export const GuestPreTrip: React.FC = () => {
   const { currentPassenger, setCurrentPassenger, addToCart } = useAppStore()
-  const [passengers, setPassengers] = useState<Passenger[]>([])
+
   const [offers, setOffers] = useState<Offer[]>([])
   const [bundles, setBundles] = useState<Bundle[]>([])
   const [rules, setRules] = useState<Rule[]>([])
@@ -253,8 +253,6 @@ export const GuestPreTrip: React.FC = () => {
           mockApi.getBundles(),
           mockApi.getRules()
         ])
-        
-        setPassengers(passengersData)
         setOffers(offersData)
         setBundles(bundlesData)
         setRules(rulesData)

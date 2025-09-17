@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Calendar, MapPin, Cloud, Sun, CloudRain, Plus } from 'lucide-react'
+import { MapPin, Cloud, Sun, CloudRain, Plus } from 'lucide-react'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { Badge } from '@/components/Badge'
 import { useAppStore } from '@/store'
 import { mockApi } from '@/lib/mockApi'
-import { Offer, Bundle, Weather, Rule } from '@/types'
+import { Offer, Weather, Rule } from '@/types'
 import { RuleEngine, createContextFromPassenger } from '@/lib/ruleEngine'
 import { analytics, ANALYTICS_EVENTS } from '@/lib/analytics'
 import { t } from '@/lib/i18n'
@@ -286,7 +286,7 @@ export const GuestOnboard: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [weather, setWeather] = useState<Weather[]>([])
   const [offers, setOffers] = useState<Offer[]>([])
-  const [bundles, setBundles] = useState<Bundle[]>([])
+
   const [rules, setRules] = useState<Rule[]>([])
   const [promotedOffers, setPromotedOffers] = useState<Offer[]>([])
   const [appliedBadges, setAppliedBadges] = useState<string[]>([])
@@ -295,7 +295,7 @@ export const GuestOnboard: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [weatherData, offersData, bundlesData, rulesData] = await Promise.all([
+        const [weatherData, offersData, , rulesData] = await Promise.all([
           mockApi.getWeather(),
           mockApi.getOffers(),
           mockApi.getBundles(),
@@ -304,7 +304,6 @@ export const GuestOnboard: React.FC = () => {
         
         setWeather(weatherData)
         setOffers(offersData)
-        setBundles(bundlesData)
         setRules(rulesData)
         
         // Set default date to today or first itinerary item

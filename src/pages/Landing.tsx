@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Users, Zap, TrendingUp, Anchor } from 'lucide-react'
+import { ArrowRight, Users, Zap, TrendingUp } from 'lucide-react'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { useAppStore } from '@/store'
@@ -174,6 +174,12 @@ const FeatureDescription = styled.p`
   font-size: ${theme.typography.fontSize.sm};
 `
 
+const PrimaryButton = styled(Button)`
+  background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+  border: none;
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+`
+
 const features = [
   {
     icon: <Users size={32} />,
@@ -229,19 +235,14 @@ export const Landing: React.FC = () => {
         </HeroSubtitle>
         
         <CTASection>
-          <Button 
+          <PrimaryButton 
             size="lg" 
             onClick={handleStartExperience}
             data-testid="guest-demo-button"
-            style={{ 
-              background: 'linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%)',
-              border: 'none',
-              boxShadow: '0 4px 20px rgba(14, 165, 233, 0.3)'
-            }}
           >
             Begin Your Experience
             <ArrowRight size={20} />
-          </Button>
+          </PrimaryButton>
           <Button 
             size="lg" 
             variant="outline" 

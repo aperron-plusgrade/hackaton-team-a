@@ -317,15 +317,16 @@ export const GuidedJourney: React.FC = () => {
         )}
 
         <NavigationButtons>
-          <Button
-            variant="outline"
-            onClick={handleBack}
-            disabled={currentStep === 0}
-            style={{ visibility: currentStep === 0 ? 'hidden' : 'visible' }}
-          >
-            <ArrowLeft size={16} />
-            Back
-          </Button>
+          <div style={{ visibility: currentStep === 0 ? 'hidden' : 'visible' }}>
+            <Button
+              variant="outline"
+              onClick={handleBack}
+              disabled={currentStep === 0}
+            >
+              <ArrowLeft size={16} />
+              Back
+            </Button>
+          </div>
           
           <Button
             onClick={handleNext}

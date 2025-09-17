@@ -265,7 +265,7 @@ export const ActivitySelection: React.FC = () => {
     navigate('/guest/trip-map')
   }
 
-  const getActivityType = (id: string) => activityTypes.find(type => type.id === id)
+
 
   return (
     <SelectionContainer>

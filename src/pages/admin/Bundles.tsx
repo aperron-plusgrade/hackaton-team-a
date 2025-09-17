@@ -243,10 +243,12 @@ export const AdminBundles: React.FC = () => {
         <EmptyState>
           <h3>No bundles created yet</h3>
           <p>Create your first bundle to offer curated packages to guests.</p>
-          <Button onClick={handleCreateBundle} style={{ marginTop: "16px" }}>
-            <Plus size={20} />
-            Create First Bundle
-          </Button>
+          <div style={{ marginTop: "16px" }}>
+            <Button onClick={handleCreateBundle}>
+              <Plus size={20} />
+              Create First Bundle
+            </Button>
+          </div>
         </EmptyState>
       ) : (
         <BundlesGrid>

@@ -415,7 +415,8 @@ export const DestinationActivities: React.FC = () => {
       </ActivitiesGrid>
       
       <div style={{ position: 'sticky', bottom: '16px', padding: '0 16px' }}>
-        <Card style={{ padding: '16px', background: 'white', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '2px solid #0EA5E9' }}>
+        <div style={{ padding: '16px', background: 'white', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '2px solid #0EA5E9', borderRadius: '12px' }}>
+          <Card>
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
             <h3 style={{ margin: '0 0 8px 0', color: '#0F172A', fontSize: '18px', fontWeight: '600' }}>
               Ready to Book Your Adventures?
@@ -431,7 +432,8 @@ export const DestinationActivities: React.FC = () => {
           >
             Complete My Booking
           </Button>
-        </Card>
+          </Card>
+        </div>
       </div>
       </div>
     </ActivitiesContainer>

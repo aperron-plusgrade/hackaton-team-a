@@ -194,10 +194,12 @@ export const AdminOffers: React.FC = () => {
         <EmptyState>
           <h3>No offers created yet</h3>
           <p>Create your first offer to get started with upselling.</p>
-          <Button onClick={handleCreateOffer} style={{ marginTop: '16px' }}>
-            <Plus size={20} />
-            Create First Offer
-          </Button>
+          <div style={{ marginTop: '16px' }}>
+            <Button onClick={handleCreateOffer}>
+              <Plus size={20} />
+              Create First Offer
+            </Button>
+          </div>
         </EmptyState>
       ) : (
         <OffersGrid>

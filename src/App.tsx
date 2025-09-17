@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line @typescript-eslint/no-unused-vars
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme } from '@/styles/theme'

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Minus, Plus, Trash2, CreditCard, Star, Gift } from "lucide-react";
+import { Minus, Plus, Trash2, CreditCard, Star, Gift, Check } from "lucide-react";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { useAppStore } from "@/store";
@@ -271,6 +272,14 @@ const EmptyIcon = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
+const CheckoutButton = styled(Button)<{ isComplete?: boolean; isProcessing?: boolean }>`
+  margin-top: 16px;
+  background: ${({ isComplete, isProcessing }) => 
+    isComplete ? "#10B981" : isProcessing ? "#6B7280" : undefined};
+  position: relative;
+  overflow: hidden;
+`;
+
 // Mock product images
 const getProductImage = (type: string, id: string) => {
   const images = {
@@ -289,6 +298,7 @@ const getProductImage = (type: string, id: string) => {
 };
 
 export const GuestCart: React.FC = () => {
+  const navigate = useNavigate();
   const {
     cartItems,
     updateCartItemQuantity,
@@ -506,7 +516,7 @@ export const GuestCart: React.FC = () => {
           </PaymentButton>
         </PaymentOptions>
 
-        <Button
+        <CheckoutButton
           fullWidth
           size="lg"
           onClick={handleCheckout}
@@ -514,16 +524,8 @@ export const GuestCart: React.FC = () => {
             (paymentMethod === "points" && !canPayWithPoints) || isProcessing
           }
           data-testid="checkout-button"
-          style={{
-            marginTop: "16px",
-            background: isComplete
-              ? "#10B981"
-              : isProcessing
-              ? "#6B7280"
-              : undefined,
-            position: "relative",
-            overflow: "hidden",
-          }}
+          isComplete={isComplete}
+          isProcessing={isProcessing}
         >
           {isComplete ? (
             <>
@@ -561,7 +563,7 @@ export const GuestCart: React.FC = () => {
               Complete Booking ${totalAmount.toFixed(2)}
             </>
           )}
-        </Button>
+        </CheckoutButton>
 
         {paymentMethod === "card" && (
           <div

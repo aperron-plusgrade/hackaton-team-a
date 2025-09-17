@@ -7,6 +7,8 @@ export const theme = {
     sunshine: '#FCD34D', // Warm gold - premium features
     ocean: '#0369A1', // Deep ocean - navigation
     sunset: '#F97316', // Sunset - calls to action
+    teal: '#06B6D4', // Teal - same as secondary for compatibility
+    gold: '#F59E0B', // Gold - same as accent for compatibility
     
     // Supporting colors
     navy: '#0F172A', // Deep navy
