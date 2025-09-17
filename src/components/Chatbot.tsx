@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { MessageCircle, X, Send, Anchor } from 'lucide-react'
+import { MessageCircle, X, Send } from 'lucide-react'
 import { Button } from './Button'
+import { Logo } from './Logo'
 import { useAppStore } from '@/store'
 
 const float = keyframes`
@@ -300,7 +301,7 @@ export const Chatbot: React.FC = () => {
       <ChatWindow isOpen={isOpen}>
         <ChatHeader>
           <ChatTitle>
-            <Anchor size={20} />
+            <Logo size="sm" hideText />
             Cruise Assistant
           </ChatTitle>
           <CloseButton onClick={handleToggle}>

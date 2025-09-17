@@ -216,9 +216,9 @@ export const Landing: React.FC = () => {
 
   const handleStartExperience = () => {
     setPersona('guest')
-    navigate('/guest/pretrip')
+    navigate('/guest/activity-selection')
     analytics.track(ANALYTICS_EVENTS.PAGE_VIEWED, { 
-      page: 'guest_pretrip',
+      page: 'guest_activity_selection',
       source: 'landing_cta'
     })
   }

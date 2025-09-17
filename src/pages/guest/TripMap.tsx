@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { MapPin, Calendar, Thermometer, Wind, ShoppingCart, Anchor } from 'lucide-react'
+import { MapPin, Calendar, Thermometer, Wind, ShoppingCart } from 'lucide-react'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { Badge } from '@/components/Badge'
+import { Logo } from '@/components/Logo'
 import { useAppStore } from '@/store'
 import { mockApi } from '@/lib/mockApi'
 import { Weather, Offer } from '@/types'
@@ -394,7 +395,7 @@ export const TripMap: React.FC = () => {
         </RouteMap>
         
         <ShipIcon>
-          <Anchor size={32} />
+          <Logo size="md" hideText />
         </ShipIcon>
       </MapArea>
 

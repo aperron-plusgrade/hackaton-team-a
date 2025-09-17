@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Anchor, User, ShoppingCart, Menu } from 'lucide-react'
+import { User, ShoppingCart, Menu } from 'lucide-react'
 import { Button } from './Button'
 import { Badge } from './Badge'
+import { Logo } from './Logo'
 import { useAppStore } from '@/store'
 import { analytics, ANALYTICS_EVENTS } from '@/lib/analytics'
 
@@ -59,22 +60,7 @@ const MenuButton = styled.button`
   }
 `
 
-const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  font-size: ${({ theme }) => theme.typography.fontSize.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-  cursor: pointer;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.typography.fontSize.lg};
-    
-    span {
-      display: none;
-    }
-  }
-`
+
 
 const HeaderActions = styled.div`
   display: flex;
@@ -178,10 +164,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             <Menu size={24} />
           </MenuButton>
           
-          <Logo onClick={handleLogoClick} data-testid="logo">
-            <Anchor size={28} />
-            <span>CruiseMate</span>
-          </Logo>
+          <Logo onClick={handleLogoClick} data-testid="logo" size="md" />
         </LeftSection>
         
         <HeaderActions>

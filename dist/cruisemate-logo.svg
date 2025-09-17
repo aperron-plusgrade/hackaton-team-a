@@ -1,0 +1,38 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FCD34D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F97316;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F2FE;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#7DD3FC;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#0EA5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0369A1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0EA5E9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sun -->
+  <circle cx="500" cy="150" r="120" fill="url(#sunGradient)" />
+  
+  <!-- Ship Hull -->
+  <path d="M150 350 Q200 320 300 320 L600 320 Q650 320 680 350 L680 400 Q680 420 660 420 L170 420 Q150 420 150 400 Z" fill="url(#shipGradient)" />
+  
+  <!-- Ship Deck Lines -->
+  <rect x="180" y="340" width="480" height="8" rx="4" fill="white" opacity="0.8" />
+  <rect x="200" y="360" width="440" height="6" rx="3" fill="white" opacity="0.6" />
+  <rect x="220" y="380" width="400" height="4" rx="2" fill="white" opacity="0.4" />
+  
+  <!-- Ship Superstructure -->
+  <rect x="300" y="280" width="200" height="40" rx="8" fill="white" />
+  <rect x="320" y="260" width="160" height="20" rx="4" fill="#F97316" />
+  
+  <!-- Waves -->
+  <path d="M0 450 Q100 430 200 450 T400 450 T600 450 T800 450 L800 500 Q600 480 400 500 T0 500 Z" fill="url(#waveGradient)" />
+  <path d="M0 480 Q150 460 300 480 T600 480 T800 480 L800 520 Q600 500 400 520 T0 520 Z" fill="url(#waveGradient)" opacity="0.7" />
+</svg>

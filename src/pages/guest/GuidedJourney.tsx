@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ArrowRight, ArrowLeft, Check, MapPin, Calendar, Star } from 'lucide-react'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
+import { Logo } from '@/components/Logo'
 import { useAppStore } from '@/store'
 
 const JourneyContainer = styled.div`
@@ -185,7 +186,7 @@ const steps: Step[] = [
     id: 'welcome',
     title: 'Welcome to CruiseMate',
     description: 'Your premium cruise companion designed to curate exceptional experiences tailored to your preferences.',
-    icon: 'anchor'
+    icon: 'logo'
   },
   {
     id: 'interests',
@@ -283,7 +284,7 @@ export const GuidedJourney: React.FC = () => {
 
       <StepCard>
         <StepIcon>
-          {step.icon}
+          {step.icon === 'logo' ? <Logo size="lg" hideText /> : step.icon}
         </StepIcon>
         
         <StepTitle>{step.title}</StepTitle>

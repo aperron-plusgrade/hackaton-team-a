@@ -254,15 +254,14 @@ export const ActivitySelection: React.FC = () => {
   }
 
   const handleContinue = () => {
-    if (selectedTypes.length === 0) return
-    
     setSelectedActivityTypes(selectedTypes)
     analytics.track('activity_selection_completed', {
       selectedTypes,
-      count: selectedTypes.length
+      count: selectedTypes.length,
+      skipped: selectedTypes.length === 0
     })
     
-    navigate('/guest/trip-map')
+    navigate('/guest/onboard-upgrades')
   }
 
 
@@ -319,23 +318,42 @@ export const ActivitySelection: React.FC = () => {
         </ActivityGrid>
       </ActivitiesSection>
 
-      {selectedTypes.length > 0 && (
-        <ContinueSection>
-          <SelectedCount>
-            {selectedTypes.length} {selectedTypes.length === 1 ? 'activity type' : 'activity types'} selected
-          </SelectedCount>
-          
-          <Button
-            size="lg"
-            fullWidth
-            onClick={handleContinue}
-            data-testid="continue-button"
-          >
-            Continue to Trip Map
-            <ChevronRight size={20} />
-          </Button>
-        </ContinueSection>
-      )}
+      <ContinueSection>
+        {selectedTypes.length > 0 ? (
+          <>
+            <SelectedCount>
+              {selectedTypes.length} {selectedTypes.length === 1 ? 'activity type' : 'activity types'} selected
+            </SelectedCount>
+            
+            <Button
+              size="lg"
+              fullWidth
+              onClick={handleContinue}
+              data-testid="continue-button"
+            >
+              Continue to Upgrades
+              <ChevronRight size={20} />
+            </Button>
+          </>
+        ) : (
+          <>
+            <SelectedCount>
+              Select activities to get personalized recommendations, or skip to explore everything
+            </SelectedCount>
+            
+            <Button
+              size="lg"
+              fullWidth
+              variant="outline"
+              onClick={handleContinue}
+              data-testid="skip-button"
+            >
+              Skip for Now - Continue to Upgrades
+              <ChevronRight size={20} />
+            </Button>
+          </>
+        )}
+      </ContinueSection>
     </SelectionContainer>
   )
 }
